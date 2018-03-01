@@ -1,0 +1,50 @@
+    
+#container-scroll {
+    width: 100% !important;
+    margin: 50px auto;
+    background: white;
+    padding: 5% 0px;
+    border: solid 1px lightgrey;
+    overflow: hidden;
+}
+
+/*photobanner-scroll*/
+ 
+.photobanner-scroll {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.photobanner-scroll img {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    max-width:100%;
+    max-height:100%;
+}
+ 
+.photobanner-scroll img:hover {
+    -webkit-transform: scale(1.1) !important;
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    cursor: pointer;
+ 
+    -webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.2);
+}
+
+#container-scroll:hover .photobanner-scroll 
+{
+    -webkit-animation-play-state: paused !important;
+    -moz-animation-play-state: paused !important;
+    -o-animation-play-state: paused !important;
+     animation-play-state: paused !important;
+}
