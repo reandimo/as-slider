@@ -1,5 +1,14 @@
 /*----------------------------------- WP ADMIN ---------------------*/
     
+.delete-btn{
+
+	background: #ff1616e3 !important;
+    border-color: darkred !important;
+    color: white !important;
+    text-shadow: none !important;
+
+}
+
 .list
 {
     width: 100%;
