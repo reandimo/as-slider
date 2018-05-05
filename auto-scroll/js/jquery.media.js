@@ -97,33 +97,24 @@ $(document).on('click', '.remove_image_button', function() {
         });
 
         //Delete Slider Button
-        $('#delete-as').click(function(){
+        $('.delete-as').click(function(){
 
-            var inputImages = '';
+            var button = $(this);
 
-            $('input[name*=as_images]').each(function(){
-
-                inputImages+= $(this).val()+'|';
-
-            });
-
-            var images = inputImages.slice(0,-1);
-
-            var as_id = $('input[name=as_id]').val(), as_name = $('input[name=as_name]').val(), as_time_scroll = $('input[name=as_time_scroll]').val();
-
+            var as_id = $(this).attr('slider-id');
 
             // since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
             $.ajax({
                 type: "POST",
                 url: ajaxurl,
-                data: { action: 'nativo_as_delete_ajax_post' , as_id: as_id, as_name : as_name, as_time_scroll: as_time_scroll, as_images: images }
+                data: { action: 'nativo_as_delete_ajax_post' , as_id: as_id }
               }).done(function( msg ) {
 
                      var res = $.parseJSON(msg);
 
                      $('.wrap').append(res.message);
 
-                     $('#shortcode').val('[as-gallery id="'+res.as_id+'"]');
+                     button.closest('.list__item').fadeOut();
 
              });
 

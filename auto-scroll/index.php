@@ -71,14 +71,21 @@ function nativo_as_menu()
 	add_menu_page( 'Auto Scroll Slider', 'Sliders', 'manage_options', 'as-slider', 'nativo_get_as_grid', 'dashicons-format-gallery' );
 	//Submenu pages
 	add_submenu_page( 'as-slider', 
-    				  'Auto Scroll Slider', 
+    				  'Scroll Banner', 
     				  'Crear Slider',
     				  'manage_options', 
     				  'as-new',
     				  'nativo_as_new_slider' );
 
+	add_submenu_page( 'as-slider', 
+    				  'Scroll Banner', 
+    				  'Editar Slider',
+    				  'manage_options', 
+    				  'as-edit',
+    				  'nativo_get_as_slider' );
+
     add_submenu_page( 'as-slider', 
-    				  'Auto Scroll Slider', 
+    				  'Scroll Banner', 
     				  'Ajustes',
     				  'manage_options', 
     				  'as-opt',
@@ -319,8 +326,11 @@ if ( !current_user_can( 'manage_options' ) )  {
 							</p>
 
 							<section align="center">
+
 								<a class="button button-primary button-large" href="?page=as-edit&as-id=<?= $field['as_id'] ?>"><span style="margin-top: 4px;" class="dashicons dashicons-edit"></span> Editar</a>
-								<a class="button button-primary delete-btn button-large" href="?page=as-edit&as-id=<?= $field['as_id'] ?>"><span style="margin-top: 4px;" class="dashicons dashicons-no"></span> eliminar</a>
+								
+								<a slider-id="<?= $field['as_id'] ?>" class="button button-primary delete-btn delete-as button-large"><span style="margin-top: 4px;" class="dashicons dashicons-no"></span> Eliminar</a>
+							
 							</section>
 						</figcaption>
 					</figure>
@@ -520,28 +530,17 @@ function nativo_as_update_ajax_post() {
 
 //Ajax Post - Delete Slider Data
 function nativo_as_delete_ajax_post() {
-/*
+
     global $wpdb;
        
     $table_name = $wpdb->prefix . 'auto_scroll';
 
-    $save_as = $wpdb->query("INSERT INTO `$table_name`( 
-    						`as_images`, 
-					    	`as_name`, 
-					    	`as_time_scroll`, 
-					    	`as_created`, 
-					    	`as_updated`) 
-
-					    	VALUES ( '". $_POST['as_images'] ."',
-					    	'". $_POST['as_name'] ."',
-					    	'". $_POST['as_time_scroll'] ."',
-					    	NOW(),
-					    	NOW() )");
+    $delete_as = $wpdb->query("DELETE FROM `$table_name` WHERE `as_id`='". $_POST['as_id'] ."'");
 
     //ERROR HANDLER
-    if ($save_as == true) {
+    if ($delete_as == true) {
     	
-    	$response = array('code' => 1, 'message' => '<div class="updated fade"><p><strong>Slider Agregado!</p></div>', 'as_id' => $wpdb->insert_id );
+    	$response = array('code' => 1, 'message' => '<div class="updated fade"><p><strong>Slider Eliminado!</p></div>', 'as_id' => $_POST['as_id'] );
     
     }else{
 
@@ -550,7 +549,7 @@ function nativo_as_delete_ajax_post() {
 	        $str   = htmlspecialchars( $wpdb->last_result, ENT_QUOTES );
 	        $query = htmlspecialchars( $wpdb->last_query, ENT_QUOTES );
 
-	        $msg = '<div class="error fade"><p><strong>Ups! Hubo un error y no se pudo agregar el Slider.</strong></p></div>';
+	        $msg = '<div class="error fade"><p><strong>Ups! Hubo un error y no se pudo eliminar el Slider.</strong></p></div>';
 
 	    }
 
@@ -562,7 +561,7 @@ function nativo_as_delete_ajax_post() {
     echo json_encode($response);
 
 	wp_die(); // this is required to terminate immediately and return a proper response
-*/
+
 }
 
 /*----------------------------------------------------------------------------------------
